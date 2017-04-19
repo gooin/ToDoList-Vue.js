@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+
+        .finished{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar navbar-default">
+    <div class="nav-header">
+        <a class="navbar-brand" href="#">Vue.js 2.0 Todo List App</a>
+    </div>
+</div>
+
+<div id="app" class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3>{{ title }}</h3>
+        </div>
+        <div class="panel-body">
+            <form role="form" v-on:submit.prevent="addTodo(newTodo)">
+                <div class="input-group">
+                    <input v-model="newTodo.title" type="text" class="form-control" placeholder="请输入事项">
+                    <span class="input-group-btn"><button type="submit" class="btn btn-info">添加</button></span>
+                </div>
+            </form>
+            <div>
+                <br>
+                <ul class="list-group">
+                    <li v-for="(item, index) in items"
+                        class="list-group-item"
+                        :class="{finished: item.isFinished}"
+                        v-on:click="toggleFinish(item)">
+                        {{ item.title }}
+                        <span v-if="item.isFinished == true" class="label label-success">已完成</span>
+                        <span v-else class="label label-info">未完成</span>
+                        <button class="btn btn-danger btn-xs pull-right" v-on:click="deleteTodo(index)">删除</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/vue/2.2.6/vue.js"></script>
+<script type="text/javascript">
+    let app = new Vue({
+        el: '#app',
+        data: {
+            title: 'Todo List',
+            message: 'Hello, Vue',
+            items: [
+                {title: 'mdzz', isFinished: true}
+            ],
+            newTodo: {
+                title: '', isFinished: false
+            }
+        },
+        methods: {
+            addTodo(newTodo){
+                this.items.push(newTodo);
+                this.newTodo = {title: '', isFinished: false}
+            },
+            deleteTodo(index){
+                this.items.splice(index,1)
+            },
+            toggleFinish(item){
+                item.isFinished = !item.isFinished
+            }
+        }
+
+    });
+
+</script>
+</body>
+</html>
