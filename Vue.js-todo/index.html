@@ -45,7 +45,7 @@
                      style="border-bottom: solid; border-color: lavender; margin: 5px 5px">
                     <!-- v-bind:class 动态添加 class：如果 isFinished 为 true，则添加 finished 属性-->
                     <!-- v-on:click 监听单个事项的点击事件，点击后执行 toggleFinish 函数-->
-                    <div class="col-md-9" v-bind:class="{finished: item.isFinished}"
+                    <div class="col-md-8" v-bind:class="{finished: item.isFinished}"
                          v-on:click="toggleFinish(item)">
                         <!--显示每个事项的标题-->
                         <span style="font-size: 1.7em">{{ item.title }} </span>
@@ -56,7 +56,7 @@
                         <!--添加显示事项的添加时间-->
                         <span class="small">  添加于：{{item.time}}</span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <!--监听点击事件，点击后执行 deleteTodo 函数 -->
                         <button class="btn btn-danger btn-xs pull-right" v-on:click="deleteTodo(index)">删除</button>
                     </div>
