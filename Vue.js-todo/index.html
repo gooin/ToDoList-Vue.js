@@ -5,7 +5,6 @@
     <title>Todo List</title>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-
         .finished{
             text-decoration: line-through;
         }
@@ -24,52 +23,72 @@
             <h3>{{ title }}</h3>
         </div>
         <div class="panel-body">
+             <!--监听提交按钮的点击事件 点击后执行函数 addTodo-->
             <form role="form" v-on:submit.prevent="addTodo(newTodo)">
                 <div class="input-group">
+                    <!--将输入内容与 newTodo 的 title 绑定 -->
                     <input v-model="newTodo.title" type="text" class="form-control" placeholder="请输入事项">
                     <span class="input-group-btn"><button type="submit" class="btn btn-info">添加</button></span>
                 </div>
             </form>
             <div>
-                <br>
                 <ul class="list-group">
+                    <!--从items中取出item（todo的单个事件）-->
+                    <!-- v-bind:class 动态添加 class：如果 isFinished 为 true，则添加 finished 属性-->
+                    <!-- v-on:click 监听单个事项的点击事件，点击后执行 toggleFinish 函数-->
                     <li v-for="(item, index) in items"
                         class="list-group-item"
-                        :class="{finished: item.isFinished}"
-                        v-on:click="toggleFinish(item)">
-                        {{ item.title }}
-                        <span v-if="item.isFinished == true" class="label label-success">已完成</span>
-                        <span v-else class="label label-info">未完成</span>
-                        <button class="btn btn-danger btn-xs pull-right" v-on:click="deleteTodo(index)">删除</button>
+                    v-bind:class="{finished: item.isFinished}"
+                    v-on:click="toggleFinish(item)">
+                        <!--显示每个事项的标题-->
+                    {{ item.title }}
+                        <!--如果 item 的 isFinished 为true，则显示 已完成 标签-->
+                    <span v-if="item.isFinished == true" class="label label-success">已完成</span>
+                        <!--如果 item 的 isFinished 为 false，则显示 未完成 标签-->
+                    <span v-else class="label label-warning">未完成</span>
+                        <!--添加显示事项的添加时间-->
+                    <span class="small">{{item.time}}</span>
+                        <!--监听点击事件，点击后执行 deleteTodo 函数 -->
+                    <button class="btn btn-danger btn-xs pull-right" v-on:click="deleteTodo(index)">删除</button>
                     </li>
                 </ul>
+                <br>
             </div>
         </div>
     </div>
 </div>
-
+        <!--引用 Vue.js -->
 <script src="http://cdn.bootcss.com/vue/2.2.6/vue.js"></script>
+        <!--引用 moment.js 用于显示时间-->
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script type="text/javascript">
     let app = new Vue({
+        // 将 id="app"
         el: '#app',
+        // 绑定数据， 可以用 {{}} 调用
         data: {
             title: 'Todo List',
             message: 'Hello, Vue',
             items: [
-                {title: 'mdzz', isFinished: true}
+
+//                {title: 'mdzz', isFinished: true, time: ''}
             ],
             newTodo: {
-                title: '', isFinished: false
+                title: '', isFinished: false, time: moment().format('LT')
             }
         },
         methods: {
+            //添加事项
             addTodo(newTodo){
                 this.items.push(newTodo);
-                this.newTodo = {title: '', isFinished: false}
+                // 添加后将输入框内容置空 （时间保留）
+                this.newTodo = {title: '', isFinished: false, time: moment().format('LT')}
             },
+            // 删除事项
             deleteTodo(index){
                 this.items.splice(index,1)
             },
+            // 设置点击事件 点击后将 isFinished 值取反
             toggleFinish(item){
                 item.isFinished = !item.isFinished
             }
