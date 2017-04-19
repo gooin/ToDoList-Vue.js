@@ -15,7 +15,8 @@
 <div class="navbar navbar-default">
     <div class="nav-header">
         <a class="navbar-brand" href="#">Vue.js 2.0 Todo List App</a>
-        <a class="navbar-brand" href="https://github.com/gooin/ToDoList-Vue.js/blob/master/Vue.js-todo/index.html"><img src="http://i2.muimg.com/567571/bb354ef83b09a66e.png"></a>
+        <a class="navbar-brand" href="https://github.com/gooin/ToDoList-Vue.js/blob/master/Vue.js-todo/index.html"><img
+                src="http://i2.muimg.com/567571/bb354ef83b09a66e.png"></a>
     </div>
 
 </div>
@@ -42,24 +43,23 @@
                 <div class="col-md-12"
                      v-for="(item, index) in items"
                      style="border-bottom: solid; border-color: lavender; margin: 5px 5px">
-                        <!-- v-bind:class 动态添加 class：如果 isFinished 为 true，则添加 finished 属性-->
-                        <!-- v-on:click 监听单个事项的点击事件，点击后执行 toggleFinish 函数-->
-                        <div class="col-md-9" v-bind:class="{finished: item.isFinished}"
-                             v-on:click="toggleFinish(item)">
-                            <!--显示每个事项的标题-->
-                            <span style="font-size: 1.7em">{{ item.title }} </span>
-                            <!--如果 item 的 isFinished 为true，则显示 已完成 标签-->
-                            <span v-if="item.isFinished == true" class="label label-success">已完成</span>
-                            <!--如果 item 的 isFinished 为 false，则显示 未完成 标签-->
-                            <span v-else class="label label-warning">未完成</span>
-                            <!--添加显示事项的添加时间-->
-                            <span class="small">  添加于：{{item.time}}</span>
-                        </div>
-                        <div class="col-md-3">
-                            <!--监听点击事件，点击后执行 deleteTodo 函数 -->
-                            <button class="btn btn-danger btn-xs pull-right" v-on:click="deleteTodo(index)">删除</button>
-                        </div>
-                        <hr>
+                    <!-- v-bind:class 动态添加 class：如果 isFinished 为 true，则添加 finished 属性-->
+                    <!-- v-on:click 监听单个事项的点击事件，点击后执行 toggleFinish 函数-->
+                    <div class="col-md-9" v-bind:class="{finished: item.isFinished}"
+                         v-on:click="toggleFinish(item)">
+                        <!--显示每个事项的标题-->
+                        <span style="font-size: 1.7em">{{ item.title }} </span>
+                        <!--如果 item 的 isFinished 为true，则显示 已完成 标签-->
+                        <span v-if="item.isFinished == true" class="label label-success">已完成</span>
+                        <!--如果 item 的 isFinished 为 false，则显示 未完成 标签-->
+                        <span v-else class="label label-warning">未完成</span>
+                        <!--添加显示事项的添加时间-->
+                        <span class="small">  添加于：{{item.time}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <!--监听点击事件，点击后执行 deleteTodo 函数 -->
+                        <button class="btn btn-danger btn-xs pull-right" v-on:click="deleteTodo(index)">删除</button>
+                    </div>
 
                 </div>
 
